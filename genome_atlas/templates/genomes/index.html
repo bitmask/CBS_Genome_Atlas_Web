@@ -1,0 +1,9 @@
+{% if latest_genome_list %}
+    <ul>
+    {% for genome in latest_genome_list %}
+        <li><a href="/genome/{{ genome.id }}/">{{ genome.genome_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No genomes are available.</p>
+{% endif %}
