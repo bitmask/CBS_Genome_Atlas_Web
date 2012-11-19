@@ -5,8 +5,9 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', 'displaygenome.views.frontpage'),
     url(r'^genome/$', 'displaygenome.views.index'),
-    url(r'^genome/(?P<genome_id>\d+)$', 'displaygenome.views.detail'),
+    url(r'^genome/(?P<genome_id>\d+)/$', 'displaygenome.views.detail'),
     # Examples:
     # url(r'^$', 'genome_atlas.views.home', name='home'),
     # url(r'^genome_atlas/', include('genome_atlas.foo.urls')),

@@ -1,9 +1,43 @@
+{% include "genomes/header.html" %}
+
+
+
 {% if latest_genome_list %}
-    <ul>
+<div>
+Most recently added genomes:
+</div>
+    <table border=1>
+        <tr>
+            <th>Tax id</th>
+            <th>Bioproject id</th>
+            <th>Genome Name</th>
+            <th>Score</th>
+            <th>Chromosomes</th>
+            <th>Plasmids</th>
+            <th>Length (bp)</th>
+            <th>Genes</th>
+            <th>Percent AT</th>
+            <th>rRNA</th>
+            <th>tRNA</th>
+            <th>Accessions</th>
     {% for genome in latest_genome_list %}
-        <li><a href="/genome/{{ genome.id }}/">{{ genome.genome_name }}</a></li>
+        <tr>
+            <td>{{ genome.tax_id }}</td>
+            <td>{{ genome.bioproject_id }}</td>
+            <td><a href="/genome/{{ genome.genome_id }}/">{{ genome.genome_name }}</a></td>
+            <td>{{ genome.score }}</td>
+            <td>{{ genome.chromosome_count }}</td>
+            <td>{{ genome.plasmid_count }}</td>
+            <td>{{ genome.total_bp }}</td>
+            <td>{{ genome.gene_count }}</td>
+            <td>{{ genome.percent_at }}</td>
+            <td>{{ genome.rrna_count }}</td>
+            <td>{{ genome.trna_count }}</td>
+            <td>{{ genome.accessions }}</td>
     {% endfor %}
-    </ul>
+    </table>
 {% else %}
     <p>No genomes are available.</p>
 {% endif %}
+
+{% include "genomes/footer.html" %}

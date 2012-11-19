@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.base import ModelBase
 
 # Create your models here.
 
@@ -16,13 +17,41 @@ class Genome_Stats(models.Model):
 
     def __unicode__(self):
         return self.genome_id
-    
+
 class Replicon(models.Model):
     replicon_id = models.IntegerField(primary_key=True)
     accession = models.CharField(max_length=200)
     version = models.IntegerField()
     genome = models.ForeignKey(Genome_Stats)
     replicon_type = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.accession
+
+class tRNA(models.Model):
+    id = models.IntegerField(primary_key=True)
+    accession = models.CharField(max_length=200)
+    version = models.IntegerField()
+    start_location = models.IntegerField()
+    end_location = models.IntegerField()
+    complementary_strand = models.CharField(max_length=3)
+    amino_acid = models.CharField(max_length=3)
+    anti_codon = models.CharField(max_length=3)
+    sequence = models.CharField(max_length=1000)
+
+    def __unicode__(self):
+        return self.accession
+
+class rRNA(models.Model):
+    id = models.IntegerField(primary_key=True)
+    accession = models.CharField(max_length=200)
+    version = models.IntegerField()
+    start_location = models.IntegerField()
+    end_location = models.IntegerField();
+    complementary_strand = models.CharField(max_length=3)
+    molecule = models.CharField(max_length=3)
+    score = models.IntegerField()
+    sequence = models.CharField(max_length=1000)
 
     def __unicode__(self):
         return self.accession

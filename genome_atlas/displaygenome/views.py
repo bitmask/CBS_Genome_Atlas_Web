@@ -14,3 +14,6 @@ def index(request):
 
 def detail(request, genome_id):
     return HttpResponse("You're looking at genome %s." % genome_id)
+
+def frontpage(request):
+    return index(request)

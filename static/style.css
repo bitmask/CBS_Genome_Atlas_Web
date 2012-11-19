@@ -1,0 +1,23 @@
+body
+{
+    background-color:#d0e4fe;
+}
+
+.headerlink
+{
+    padding:    10px;
+    padding-left: 50px;
+}
+
+.searchbox
+{
+    padding:    50px;
+}
+
+.footer
+{
+    padding:    50px;
+    font-size:  small;
+    font-style: italic;
+}
+

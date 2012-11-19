@@ -1,0 +1,2 @@
+#!/bin/bash
+python manage.py runserver 10.57.5.40:8000
