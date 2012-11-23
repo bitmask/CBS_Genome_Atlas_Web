@@ -1,8 +1,6 @@
 from django.db import models
 from django.db.models.base import ModelBase
 
-# Create your models here.
-
 class Genome_Stats(models.Model):
     genome_id = models.IntegerField(primary_key=True)
     tax_id = models.IntegerField()
@@ -14,16 +12,25 @@ class Genome_Stats(models.Model):
     total_bp = models.IntegerField()
     gene_count = models.IntegerField()
     percent_at = models.FloatField()
+    modify_date = models.DateField()
+    trna_count = models.BigIntegerField()
+    rrna_count = models.BigIntegerField()
+    accessions = models.CharField(max_length=1000)
 
     def __unicode__(self):
         return self.genome_id
 
-class Replicon(models.Model):
+class Replicon_Stats(models.Model):
     replicon_id = models.IntegerField(primary_key=True)
     accession = models.CharField(max_length=200)
     version = models.IntegerField()
     genome = models.ForeignKey(Genome_Stats)
     replicon_type = models.CharField(max_length=200)
+    stat_size_bp = models.IntegerField()
+    stat_perc_at = models.FloatField()
+    stat_number_of_genes = models.IntegerField()
+    rrna_count_accession = models.IntegerField()
+    trna_count_accession = models.IntegerField()
 
     def __unicode__(self):
         return self.accession

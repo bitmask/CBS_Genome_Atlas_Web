@@ -1,5 +1,14 @@
 
 <link rel="stylesheet" href="/static/style.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/jquery.js"></script>
+
+<script>
+    $(document).ready(function() {
+      $('a').filter(function() {
+        return this.hostname && this.hostname !== location.hostname;
+      }).after(' <img src="/static/external.png" alt="external link"/>');
+    });
+</script>
 
 <img src="/static/galogo.png">
 <div>

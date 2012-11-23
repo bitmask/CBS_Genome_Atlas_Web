@@ -1,11 +1,65 @@
 body
 {
-    background-color:#d0e4fe;
+    background-color:#d0dafd;
+font-family: "Lucida Sans Unicode","Lucida Grande",Sans-Serif;
+    font-size: 14px;
+}
+
+a:link {color: rgb(102, 102, 153);}
+a:visited {color: rgb(52, 52, 153);} 
+
+.tableheader
+{
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 25px;
+}
+
+
+th
+{
+    font-weight: bold;
+    color: rgb(0, 51, 153);
+    border-bottom: 2px solid rgb(102, 120, 177);
+    padding: 10px 18px;
+    vertical-align: top;
+border: 0px none;
+outline: 0px none;
+vertical-align: baseline;
+background: none repeat scroll 0% 0% transparent;
+background-color: rgb(182,182,183);
+font-family: "Lucida Sans Unicode","Lucida Grande",Sans-Serif;
+text-align: center;
+
+}
+
+td
+{
+    font-weight: normal;
+    color: rgb(102, 102, 153);
+    border-bottom: 2px solid rgb(102, 120, 177);
+    padding: 10px 18px;
+vertical-align: top;
+border: 0px none;
+outline: 0px none;
+background: none repeat scroll 0% 0% transparent;
+background-color:#ffffff;
+text-align: center;
+border-spacing: 0px;
+font-weight: 400;
+font-style: normal;
+}
+
+tr:hover td{background:#d0dafd;color:#339;}
+
+.hidden_row
+{
+    font-size:  12px;
 }
 
 .headerlink
 {
-    padding:    10px;
+    padding:      10px;
     padding-left: 50px;
 }
 
