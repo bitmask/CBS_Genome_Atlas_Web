@@ -1,0 +1,53 @@
+<div>
+    <table border=0>
+        <tr>
+            <th>Last Modified</th>
+            <th>Tax id</th>
+            <th><img src="/static/ncbi.ico" alt="NCBI logo">Bioproject id</th>
+            <th>Genome Name</th>
+            <th>Score</th>
+            <th>Chromosomes</th>
+            <th>Plasmids</th>
+            <th>Length (bp)</th>
+            <th>Genes</th>
+            <th>Gene Density (per Kb)</th>
+            <th>Percent AT</th>
+            <th>rRNA</th>
+            <th>tRNA</th>
+        </tr>
+    {% for genome, accessions in genome_list %}
+        <tr id="{{ genome.genome_id }}" class="parent">
+            <td>{{ genome.modify_date }}</td>
+            <td>{{ genome.tax_id }}</td>
+            <td><a href="http://www.ncbi.nlm.nih.gov/bioproject?term={{ genome.bioproject_id }}">{{ genome.bioproject_id }}</a></td>
+            <td>{{ genome.genome_name }}</td>
+            <td>{{ genome.score }}</td>
+            <td>{{ genome.chromosome_count }}</td>
+            <td>{{ genome.plasmid_count }}</td>
+            <td>{{ genome.total_bp }}</td>
+            <td>{{ genome.gene_count }}</td>
+            <td>{{ genome.gene_density }}</td>
+            <td>{{ genome.percent_at }}</td>
+            <td>{{ genome.rrna_count }}</td>
+            <td>{{ genome.trna_count }}</td>
+        </tr>
+        {% for acc in accessions %}
+        <tr class="child-{{ genome.genome_id }}"> 
+            <td class="hidden_row"><img src="http://www.cbs.dtu.dk/services/gwBrowser-0.94/thumb.php?hexkey={{ rep.accession }}" onerror="imgError(this);"></td>
+            <td class="hidden_row"></td>
+            <td class="hidden_row"></td>
+            <td class="hidden_row"><a href="http://ws.cbs.dtu.dk/cgi-bin/gwBrowser-0.94/edit.cgi?hexkey={{ acc.accession }}GENOMEatlas">{{ acc.accession }}</a></td>
+            <td class="hidden_row">{{ acc.score }}</td>
+            <td class="hidden_row">{{ acc.replicon_type }}</td>
+            <td class="hidden_row">{{ acc.replicon_type }}</td>
+            <td class="hidden_row">{{ acc.stat_size_bp }}</td>
+            <td class="hidden_row">{{ acc.stat_number_of_genes }}</td>
+            <td class="hidden_row">{{ acc.gene_density }}</td>
+            <td class="hidden_row">{{ acc.stat_perc_at }}</td>
+            <td class="hidden_row">{{ acc.rrna_count_accession }}</td>
+            <td class="hidden_row">{{ acc.trna_count_accession }}</td>
+        </tr>
+        {% endfor %}
+    {% endfor %}
+    </table>
+</div>

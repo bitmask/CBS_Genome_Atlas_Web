@@ -1,0 +1,30 @@
+{% include "genomes/header.html" %}
+
+
+<h2> Parents </h2>
+
+{% if parents %}
+{% include "tax/table.html" with phyla=parents header=1 %}
+{% endif %}
+
+<h2> This Node </h2>
+{% if phyla %}
+{% include "tax/table.html" with header=False header=1 %}
+{% endif %}
+
+<h2> Children </h2>
+
+{% if children %}
+{% include "tax/table.html" with phyla=children header=1 %}
+{% endif %}
+
+
+{% if latest_genome_list %}
+<div class=tableheader>
+Most recently added genomes
+</div>
+{% include "genomes/table.html" with genome_list=latest_genome_list %}
+{% endif %}
+
+{% include "genomes/footer.html" %}
+

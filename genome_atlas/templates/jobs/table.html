@@ -1,0 +1,26 @@
+<table>
+<tr>
+<th>Accession</th>
+<th>Version</th>
+<th>Step</th>
+<th>Step Status</th>
+<th>Step Start Time</th>
+<th>Job Name</th>
+<th>Job UUID</th>
+<th>Job Status</th>
+<th>Job Start Time</th>
+</tr>
+{% for j in jobs %}
+<tr>
+<td><a href="/accession/{{ j.accession }}">{{ j.accession }}</a></td>
+<td>{{ j.version }}</td>
+<td>{{ j.step_name }}</td>
+<td>{{ j.step_status }}</td>
+<td>{{ j.step_start_time }}</td>
+<td>{{ j.job_name }}</td>
+<td>{{ j.job_uuid }}</td>
+<td>{{ j.job_status }}</td>
+<td>{{ j.job_start_time }}</td>
+</tr>
+{% endfor %}
+</table>

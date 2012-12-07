@@ -1,0 +1,28 @@
+{% include "genomes/header.html" %}
+
+
+<div>
+Administer Genomes
+</div>
+
+<div>
+Most recently failed jobs
+</div>
+
+{% if failed_jobs %}
+{% include "jobs/table.html" with jobs=failed_jobs %}
+{% endif %}
+
+
+<div>
+Most recently succeeded replicons
+</div>
+
+{% if successful_jobs %}
+{% include "jobs/table.html" with jobs=successful_jobs %}
+{% endif %}
+
+
+
+{% include "genomes/footer.html" %}
+
