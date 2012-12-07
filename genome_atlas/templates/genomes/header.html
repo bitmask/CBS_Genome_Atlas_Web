@@ -10,14 +10,33 @@
     });
 </script>
 
+<script>
+
+$(function() {
+    $('tr.parent')
+        .click(function(){
+            $(this).siblings('.child-'+this.id).toggle('fast');
+        });
+    $('tr[class^=child-]').hide(); 
+});
+
+function imgError(image){
+    image.onerror = "";
+    image.src = "/static/noimage.png";
+    return true;
+}
+
+</script>
+
 <img src="/static/galogo.png">
 <div>
 <a class="headerlink" href="/">Main</a><a class="headerlink" href="/taxonomy/">Browse Taxonomy</a> <a class="headerlink" href="/admin/">Admin</a>
 </div>
 
 <div class="searchbox">
-Search on genome name, NCBI bioproject id, accession number or taxonomic id: 
+Search on genome name, accession number or taxonomic id: 
 <br>
-<input type="text" name="query" size="50"> <button type="button" name="go">Go</button>
+<form name="search" action="/search/" method="get">
+<input type="text" name="q" size="50"> <input type="submit" value="Go">
 </div>
 
