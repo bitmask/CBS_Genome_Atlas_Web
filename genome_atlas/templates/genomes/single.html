@@ -1,62 +1,40 @@
-{% include "genomes/header.html" %}
+{% comment %}
+Expected Inputs:
+    'form_name' : the name of the form (for updates)
+    'order_by' : order_by value for this table
+    'order_dir' : order_dir value for this table
+{% endcomment %}
 
-{% if genome %}
-{% for g in genome %}
-
-<div>
-    <table border=0>
-        <tr>
-            <th>Last Modified</th>
-            <th>Tax id</th>
-            <th><img src="/static/ncbi.ico" alt="NCBI logo">Bioproject id</th>
-            <th>Genome Name</th>
-            <th>Score</th>
-            <th>Chromosomes</th>
-            <th>Plasmids</th>
-            <th>Length (bp)</th>
-            <th>Genes</th>
-            <th>Percent AT</th>
-            <th>rRNA</th>
-            <th>tRNA</th>
-        </tr>
-        <tr id="{{ genome.genome_id }}" class="parent">
-            <td>{{ g.modify_date }}</td>
-            <td>{{ g.tax_id }}</td>
-            <td><a href="http://www.ncbi.nlm.nih.gov/bioproject?term={{ genome.bioproject_id }}">{{ g.bioproject_id }}</a></td>
-            <td><a href="/genome/{{ genome.genome_id }}/">{{ g.genome_name }}</a></td>
-            <td>{{ g.score }}</td>
-            <td>{{ g.chromosome_count }}</td>
-            <td>{{ g.plasmid_count }}</td>
-            <td>{{ g.total_bp }}</td>
-            <td>{{ g.gene_count }}</td>
-            <td>{{ g.percent_at }}</td>
-            <td>{{ g.rrna_count }}</td>
-            <td>{{ g.trna_count }}</td>
-        </tr>
-        {% for rep in replicons %}
-        <tr class="child-{{ genome.genome_id }}"> 
-            <td class="hidden_row"><img src="http://www.cbs.dtu.dk/services/gwBrowser-0.94/thumb.php?hexkey={{ rep.accession }}"></td>
-            <td class="hidden_row"></td>
-            <td class="hidden_row"></td>
-            <td class="hidden_row"><a href="http://ws.cbs.dtu.dk/cgi-bin/gwBrowser-0.94/edit.cgi?hexkey={{ rep.accession }}GENOMEatlas">{{ rep.accession }}</a></td>
-            <td class="hidden_row">{{ rep.score }}</td>
-            <td class="hidden_row">{{ rep.replicon_type }}</td>
-            <td class="hidden_row">{{ rep.replicon_type }}</td>
-            <td class="hidden_row">{{ rep.stat_size_bp }}</td>
-            <td class="hidden_row">{{ rep.stat_number_of_genes }}</td>
-            <td class="hidden_row">{{ rep.stat_perc_at }}</td>
-            <td class="hidden_row">{{ rep.rrna_count_accession }}</td>
-            <td class="hidden_row">{{ rep.trna_count_accession }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</div>
-
-{% endfor %}
-
-{% else %}
-    <p>No data is available.</p>
-{% endif %}
-
-
-{% include "genomes/footer.html" %}
+{% load table_tools %}
+<table class=table-genome border=0>
+   <tr>
+      <th>Modify Date</th>
+      <th>Tax ID</th>
+      <th>Bioproject ID</th>
+      <th>Genome Name</th>
+      <th>Score</th>
+      <th>Chromosomes</th>
+      <th>Plasmids</th>
+      <th>Length (bp)</th>
+      <th>Genes</th>
+      <th>Gene Density (per&nbsp;Kbp)</th>
+      <th>Percent AT</th>
+      <th>rRNA</th>
+      <th>tRNA</th>
+   </tr>
+   <tr id="{{ genome.genome_id }}" class="parent">
+      <td>{{ genome.modify_date }}</td>
+      <td>{{ genome.tax_id }}</td>
+      <td><a href="http://www.ncbi.nlm.nih.gov/bioproject?term={{ genome.bioproject_id }}">{{ genome.bioproject_id }}</a></td>
+      <td><a href="/browse/{{genome.tax_id}}">{{ genome.genome_name }}</a></td>
+      {# <td>{{ genome.score }}</td> #}{% include "genomes/display_score.html" %}
+      <td>{{ genome.chromosome_count }}</td>
+      <td>{{ genome.plasmid_count }}</td>
+      <td>{{ genome.total_bp }}</td>
+      <td>{{ genome.gene_count }}</td>
+      <td>{{ genome.gene_density }}</td>
+      <td>{{ genome.percent_at }}</td>
+      <td>{{ genome.rrna_count }}</td>
+      <td>{{ genome.trna_count }}</td>
+   </tr>
+</table>
