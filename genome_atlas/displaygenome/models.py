@@ -23,37 +23,6 @@ class Tax_Stats(models.Model):
     nonstd_bp = models.BigIntegerField()
     at_bp = models.BigIntegerField()
 
-    #def _get_percent_at(self):
-        #"Returns compound of at_bp and total_bp"
-        #return "{0:2.2f}".format(float(self.at_bp * 100L)/float(self.total_bp))
-    #percent_at = property(_get_percent_at)
-
-    #def _get_gene_density(self):
-        #"Returns gene density as genes per Kb"
-        #if(self.gene_count and self.total_bp):
-            #return "{0:2.2f}".format(float(1000L*self.gene_count)/float(self.total_bp))
-        #else:
-            #return "0.00"
-    #gene_density = property(_get_gene_density)
-
-    #def _get_score(self):
-        #"""
-        #Returns genome score:
-        #greatest(0.1, 1-0.2*ceiling((1000000*greatest(0, (coalesce(contig.contig_count, 0) - count(replicon.accession)))/sum(stat_size_bp))/25)) as score_contig,
-        #greatest (0.1, 1 - (1- greatest (0.1, 1+.1*(0-ceiling(100*sum(stat_number_nonstd_bases)/sum(stat_size_bp)))) ) - (1 - greatest(0.1, 1-0.2*ceiling((1000000*greatest(0, (coalesce(contig.contig_count, 0) - count(replicon.accession)))/sum(stat_size_bp))/25)))) as score
-        #"""
-        #my_contig_count = float(self.contig_count) if self.contig_count else 0
-        #my_percent_nonstd = float(self.nonstd_bp * 100)/float(self.total_bp)
-        #my_replicon_count = float(self.replicon_count) if self.replicon_count else 0
-        #my_total_bp = float(self.total_bp) if self.total_bp else 0
-        #error_nonstd = .1* math.ceil(my_percent_nonstd)
-        #contigs_per_replicon = my_contig_count / my_replicon_count
-        #error_contigs = .2 * math.ceil( 1000000 * contigs_per_replicon / my_total_bp) / 25
-        #score = max(0.1, 1 - min(1, error_nonstd) - min(1, error_contigs))
-        #return "{0:1.1f}".format(score)
-
-    #score = property(_get_score)
-
 class Genome_Stats(models.Model):
 
     row_id = models.IntegerField(primary_key=True)
@@ -77,16 +46,6 @@ class Genome_Stats(models.Model):
     nonstd_bp = models.IntegerField()
     percent_nonstd_bp = models.FloatField()
     
-    #def _get_accession_list(self):
-    #    return str(self.accessions).split(" ")
-
-    #accession_list = property(_get_accession_list)
-    
-    #def _get_percent_non_std(self):
-    #    return int(math.ceil(self.nonstd_bp/self.total_bp))
-
-    #percent_nonstd_bp2 = property(_get_percent_non_std)
-
     def __unicode__(self):
         return self.genome_id
 
@@ -109,54 +68,8 @@ class Replicon_Stats(models.Model):
     contig_count = models.IntegerField()
 
 
-    #def _get_score(self):
-        #"""
-        #Returns genome score:
-        #greatest(0.1, 1-0.2*ceiling((1000000*greatest(0, (coalesce(contig.contig_count, 0) - count(replicon.accession)))/sum(stat_size_bp))/25)) as score_contig,
-        #greatest (0.1, 1 - (1- greatest (0.1, 1+.1*(0-ceiling(100*sum(stat_number_nonstd_bases)/sum(stat_size_bp)))) ) - (1 - greatest(0.1, 1-0.2*ceiling((1000000*greatest(0, (coalesce(contig.contig_count, 0) - count(replicon.accession)))/sum(stat_size_bp))/25)))) as score
-        #"""
-        #my_contig_count = float(self.stat_number_of_contigs) if self.stat_number_of_contigs else 0
-        #my_percent_nonstd = float(self.stat_number_nonstd_bases * 100)/float(self.stat_size_bp)
-        ##my_replicon_count = float(self.replicon_count) if self.replicon_count else 0
-        #my_total_bp = float(self.stat_size_bp) if self.stat_size_bp else 0
-        #error_nonstd = .1 * math.ceil( my_percent_nonstd )
-        ##contigs_per_replicon = my_contig_count / my_replicon_count
-        #error_contigs = .2 * math.ceil( 1000000 * my_contig_count / my_total_bp ) / 25
-        #score = max(0.1, 1 - min(1, error_nonstd) - min(1, error_contigs))
-        #return "{0:1.1f}".format(score)
-
-    #score = property(_get_score)
-
     def __unicode__(self):
         return self.accession
-
-#class tRNA(models.Model):
-    #id = models.IntegerField(primary_key=True)
-    #accession = models.CharField(max_length=200)
-    #version = models.IntegerField()
-    #start_location = models.IntegerField()
-    #end_location = models.IntegerField()
-    #complementary_strand = models.CharField(max_length=3)
-    #amino_acid = models.CharField(max_length=3)
-    #anti_codon = models.CharField(max_length=3)
-    #sequence = models.CharField(max_length=1000)
-
-    #def __unicode__(self):
-        #return self.accession
-
-#class rRNA(models.Model):
-    #id = models.IntegerField(primary_key=True)
-    #accession = models.CharField(max_length=200)
-    #version = models.IntegerField()
-    #start_location = models.IntegerField()
-    #end_location = models.IntegerField();
-    #complementary_strand = models.CharField(max_length=3)
-    #molecule = models.CharField(max_length=3)
-    #score = models.IntegerField()
-    #sequence = models.CharField(max_length=1000)
-
-    #def __unicode__(self):
-        #return self.accession
 
 
 # for taxonomy databases
