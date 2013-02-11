@@ -10,15 +10,21 @@ urlpatterns = patterns('',
     
     # Score Page 
     url(r'^score/$', 'displaygenome.views.score.on_request'),
+
+    # Internal direct to db access info page
+    url(r'^internal/$', 'displaygenome.views.internal.on_request'),
     
     url(r'^search/$', 'displaygenome.views.search.on_request'),
     url(r'^search/w+/$','displaygenome.views.search.on_request'),
 
     # /browse -> displaygenome.views.browse.request
     # url(r'^tax/(?P<tax_id>\d+)/$', 'displaygenome.views.tax'),
+    url(r'^browse/$', 'displaygenome.views.index.on_request'),
+    url(r'^browse/1/$', 'displaygenome.views.index.on_request'),
     url(r'^browse/(?P<tax_id>\d+)/$', 'displaygenome.views.browse.on_request'),
+
     # /admin -> worry about this later
-    url(r'^admin/$', 'displaygenome.views.admin'),
+    url(r'^admin/$', 'displaygenome.views.admin.on_request'),
 
     #    url(r'^genome/$', 'displaygenome.views.index'),
     #url(r'^genome/(?P<genome_id>\d+)/$', 'displaygenome.views.detail'),
