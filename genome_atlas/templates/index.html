@@ -1,0 +1,80 @@
+
+{% include "header.html" %}
+
+{% comment %}
+Input Data:
+ - 'taxon' : List of taxon nodes
+ - 'taxon_count' : Number of taxon nodes in this list
+ - 'genome_slice' : List of genomes (sliced by per-page/page number)
+ - 'genome_slice_first' : Where the list starts in the db
+ - 'genome_slice_count' : The number of genomes in the slice
+ - 'genome_total_count' : The number of genomes in the db
+ - 'form_data' : Form data passed to here
+ - 'forced_current_page_gen' : The current page (overriding form data -- form data can be invalid)
+ - 'number_of_pages_gen' : The total number of pages required
+
+Definition of form_data:
+ - 'current_page_gen' : the current page the genome list is on
+ - 'per_page_gen' : the number of results per page for genomes
+ - 'order_by_gen' : the column used to order the genomes
+ - 'order_dir_gen' : the direction of ordering in the genomes
+ - 'order_by_tax' : the column used to order the tax list
+ - 'order_dir_tax' : the direction of ordering in the tax list
+{% endcomment %}
+
+{% if form_data %}
+<form id="index_form" name="genome_table" action="" method="post">
+    {% csrf_token %}
+    {{ form_data.order_by_gen.as_hidden }}
+    {{ form_data.order_dir_gen.as_hidden }}
+    {{ form_data.current_page_gen.as_hidden }}
+    {{ form_data.order_by_tax.as_hidden }}
+    {{ form_data.order_dir_tax.as_hidden }}
+
+{% load table_tools %}
+
+{% comment %}
+    Begin Section TAXONOMY
+{% endcomment %}
+
+<a id="ref-order_by_tax" />
+<div class=tableheader>All Prokaryotic Phyla - Genome Average Values</div>
+
+{% include "taxonomy/table.html" with form_name="index_form" order_by=form_data.order_by_tax order_dir=form_data.order_dir_tax taxon=taxon %}
+
+<div class=result-count>Showing {{taxon_count}} Phyla</div>
+
+{% comment %}
+    End Section TAXONOMY
+{% endcomment %}
+
+{% comment %}
+    Begin section GENOME
+{% endcomment %}
+
+<a id="ref-current_page_gen" /><a id="ref-order_by_gen" />
+<div class=tableheader>Browse Genomes</div>
+
+<div class=per-page-selection>
+    <label name="per_page_label">Results per page:</label>
+    {{ form_data.per_page_gen }}
+</div>
+
+{% paginate "index_form" "current_page_gen" 1 number_of_pages_gen form_data.current_page_gen.value 3 %}
+    <div class=page-out-of>Page {{ forced_current_page_gen }} out of {{ number_of_pages_gen}}</div>
+
+{% include "genomes/table.html" with form_name="index_form" order_by=form_data.order_by_gen order_dir=form_data.order_dir_gen genome=genome_slice%}
+
+{% paginate "index_form" "current_page_gen" 1 number_of_pages_gen form_data.current_page_gen.value 3 %}
+    <div class=page-out-of>Page {{ forced_current_page_gen }} out of {{ number_of_pages_gen}}</div>
+    <div class=result-count>Showing results {{start_index}} through {{end_index}} out of {{genome_total_count}}</div>
+
+{% comment %}
+    End Section GENOME
+{% endcomment %}
+
+</form>
+{% endif %}
+
+{% include "footer.html" %}
+

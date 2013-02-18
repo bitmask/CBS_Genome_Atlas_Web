@@ -1,0 +1,104 @@
+
+{% include "header.html" %}
+
+{% comment %}
+Input Data:
+ - 'taxon_slice' : List of taxon nodes
+ - 'taxon_slice_count' : Number of taxon nodes in this list
+ - 'taxon_slice_first' : Where the list starts in the db
+ - 'taxon_total_count' : The number of taxons in the db
+
+ - 'genome_slice' : List of genomes (sliced by per-page/page number)
+ - 'genome_slice_first' : Where the list starts in the db
+ - 'genome_slice_count' : The number of genomes in the slice
+ - 'genome_total_count' : The number of genomes in the db
+
+ - 'form_data' : Form data passed to here
+
+ - 'forced_current_page_tax' : The current page (overriding form data -- form data can be invalid)
+ - 'number_of_pages_tax' : The total number of pages required
+
+ - 'forced_current_page_gen' : The current page (overriding form data -- form data can be invalid)
+ - 'number_of_pages_gen' : The total number of pages required
+
+Definition of form_data:
+ - 'current_page_gen' : the current page the genome list is on
+ - 'per_page_gen' : the number of results per page for genomes
+ - 'current_page_tax' : the current page the taxon list is on
+ - 'per_page_tax' : the number of results per page for taxons
+ - 'order_by_gen' : the column used to order the genomes
+ - 'order_dir_gen' : the direction of ordering in the genomes
+ - 'order_by_tax' : the column used to order the tax list
+ - 'order_dir_tax' : the direction of ordering in the tax list
+{% endcomment %}
+
+{% if form_data %}
+<form id="index_form" name="genome_table" action="" method="post">
+    {% csrf_token %}
+    {{ form_data.order_by_gen.as_hidden }}
+    {{ form_data.order_dir_gen.as_hidden }}
+    {{ form_data.current_page_tax.as_hidden }}
+    {{ form_data.current_page_gen.as_hidden }}
+    {{ form_data.order_by_tax.as_hidden }}
+    {{ form_data.order_dir_tax.as_hidden }}
+
+{% load table_tools %}
+
+{% comment %}
+    Begin Section TAXONOMY
+{% endcomment %}
+
+<a id="ref-order_by_tax" /><a id="ref-current_page_tax" />
+<div class=tableheader>Taxonomy Results</div>
+
+<div class=per-page-selection>
+    <label name="per_page_label">Results per page:</label>
+    {{ form_data.per_page_tax }}
+</div>
+
+{% paginate "index_form" "current_page_tax" 1 number_of_pages_tax form_data.current_page_tax.value 3 %}
+<div class=page-out-of>Page {{ forced_current_page_tax }} out of {{ number_of_pages_tax}}</div>
+
+{% include "taxonomy/table.html" with form_name="index_form" order_by=form_data.order_by_tax order_dir=form_data.order_dir_tax taxon=taxon_slice %}
+
+{% paginate "index_form" "current_page_tax" 1 number_of_pages_tax form_data.current_page_tax.value 3 %}
+    <div class=page-out-of>Page {{ forced_current_page_tax }} out of {{ number_of_pages_tax}}</div>
+    <div class=result-count>Showing {{taxon_slice_count}} Taxonomy Nodes</div>
+
+{% comment %}
+    End Section TAXONOMY
+{% endcomment %}
+
+{% comment %}
+    Begin section GENOME
+{% endcomment %}
+
+{% if genome_slice %}
+<a id="ref-current_page_gen" /><a id="ref-order_by_gen" />
+<div class=tableheader>Genome Results</div>
+
+<div class=per-page-selection>
+    <label name="per_page_label">Results per page:</label>
+    {{ form_data.per_page_gen }}
+</div>
+
+{% paginate "index_form" "current_page_gen" 1 number_of_pages_gen form_data.current_page_gen.value 3 %}
+    <div class=page-out-of>Page {{ forced_current_page_gen }} out of {{ number_of_pages_gen}}</div>
+
+{% include "genomes/table.html" with form_name="index_form" order_by=form_data.order_by_gen order_dir=form_data.order_dir_gen genome=genome_slice%}
+
+{% paginate "index_form" "current_page_gen" 1 number_of_pages_gen form_data.current_page_gen.value 3 %}
+    <div class=page-out-of>Page {{ forced_current_page_gen }} out of {{ number_of_pages_gen}}</div>
+    <div class=result-count>Showing results {{genome_slice_first}} through {{genome_slice_last}} out of {{genome_total_count}}</div>
+
+{% endif %}
+
+{% comment %}
+    End Section GENOME
+{% endcomment %}
+
+</form>
+{% endif %}
+
+{% include "footer.html" %}
+

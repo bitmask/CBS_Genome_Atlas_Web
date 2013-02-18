@@ -1,0 +1,33 @@
+{% include "header.html" %}
+
+
+<h1>Direct DB Access</h1>
+
+<h2>Access</h2>
+<div>
+The database (currently steve_private, but this will be changed before production launch) can be directly through mysql on interaction.cbs.dtu.dk.  
+</div>
+
+<div class=code>
+$ mysql<br>
+mysql&gt; use steve_private<br>
+</div>
+
+
+<h2>Tables</h2>
+<div>
+The data displayed on the website (and provided in csv dumps) is taken directly from the denormalized tables displaygenome_tax_stats, displaygenome_genome_stats and displaygenome_replicon_stats, which store data for the taxonomic entries, genomes and replicons respectively.  
+</div>
+
+<div>
+Raw data is also present in the genome, bioproject, replicon tables.  The tax tables are present in the ncbitax database, which are maintained by Hans-Henrik; they are not maintained as part of this project.
+</div>
+
+<div>
+Data in any of these tables should ONLY be changed by the suite of scripts that updates them.  This is to ensure that the averages at each taxonomic level are updated when changes are made to the underlying tables.
+</div>
+
+
+
+{% include "footer.html" %}
+

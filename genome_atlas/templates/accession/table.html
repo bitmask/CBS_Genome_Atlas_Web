@@ -1,0 +1,37 @@
+{% comment %}
+Expected Inputs:
+    'accession' : list of accessions
+    'form_name' : the name of the form (for updates)
+    'order_by' : order_by value for this table
+    'order_dir' : order_dir value for this table
+{% endcomment %}
+
+{% load table_tools %}
+<table class=table-accession border=0>
+   <tr>
+      {% table_header form_name "accession" order_by order_dir "Accession" %}
+      {% table_header form_name "version" order_by order_dir "Version"%}
+      {% table_header form_name "score" order_by order_dir "Score<sup><a href='/score' title='Definition of Score'>?</a></sup>" %}
+      {% table_header form_name "replicon_type" order_by order_dir "Replicon Type" %}
+      {% table_header form_name "total_bp" order_by order_dir "Length (bp)" %}
+      {% table_header form_name "gene_count" order_by order_dir "Genes" %}
+      {% table_header form_name "gene_density" order_by order_dir "Gene Density (per&nbsp;Kbp)" %}
+      {% table_header form_name "percent_at" order_by order_dir "Percent AT" %}
+      {% table_header form_name "rrna_count" order_by order_dir "rRNA" %}
+      {% table_header form_name "trna_count" order_by order_dir "tRNA" %}
+   </tr>
+   {% for a in accession %}
+   <tr id="{{ a.accession }}" class="parent">
+      <td>{{ a.accession }}</td>
+      <td>{{ a.version }}</td>
+      {# <td>{{ a.score }}</td> #}{% include "genomes/display_score.html" with genome=a %}
+      <td>{{ a.replicon_type }}</td>
+      <td>{{ a.total_bp }}</td>
+      <td>{{ a.gene_count }}</td>
+      <td>{{ a.gene_density }}</td>
+      <td>{{ a.percent_at }}</td>
+      <td>{{ a.rrna_count }}</td>
+      <td>{{ a.trna_count }}</td>
+   </tr>
+   {% endfor %}
+</table>

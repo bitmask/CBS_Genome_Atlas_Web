@@ -1,0 +1,108 @@
+{% load table_tools %}
+
+{% comment %}
+Inputs:
+  'parents' - A list of the parents, in order by descending genome_count
+  'current_node' - The current node (not as a list)
+  'children' - The children of the current node (as a list)
+  'is_accession' - boolean whether the children are accessions
+
+In the case that the children are accessions, genomes/single can be used with
+accessions/table to draw the current node, and the accessions.
+
+In the case that the children arent accessions, the current node can be drawn
+as tax/single and children can be drawn with tax/table
+
+Definition of form_data:
+ - 'current_page' : the current page the genome list is on
+ - 'per_page' : the number of results per page for genomes
+ - 'order_by' : the column used to order the genomes
+ - 'order_dir' : the direction of ordering in the genomes
+
+{% endcomment %}
+
+
+{% include "header.html" %}
+
+
+
+{% if form_data %}
+<form id="browse_form" name="browse_form" action="" method="post">
+    {% csrf_token %}
+    {{ form_data.current_page.as_hidden }}
+    {{ form_data.order_by.as_hidden }}
+    {{ form_data.order_dir.as_hidden }}
+    
+<div class=tableheader>
+Browse Taxonomy
+</div>
+
+{# SECTION - PARENTS #}
+
+<div class=lineage>
+{% load lineage %}
+{% lineage parents %}
+</div>
+
+{# SECTION CURRENT/CHILDREN#}
+{% if is_accession %}
+    {# SECTION CURRENT #}
+    <div class=tableheader>
+        Current Genome
+    </div>
+    {% include "genomes/single.html" with genome=current_node %}
+    {# SECTION CHILDREN #}
+    <div class=tableheader>
+        Accessions
+    </div>
+
+    <div class=per-page-selection>
+        <label name="per_page_label">Results per page:</label>
+        {{ form_data.per_page }}
+    </div>
+
+    {% paginate "browse_form" "current_page" 1 number_of_pages form_data.current_page.value 3 %}
+    <div class=page-out-of>Page {{ forced_current_page }} out of {{ number_of_pages }}</div>
+
+    {% include "accession/table.html" with form_name="browse_form" order_by=form_data.order_by order_dir=form_data.order_dir accession=children %}
+  
+    {% paginate "browse_form" "current_page" 1 number_of_pages form_data.current_page.value 3 %}
+    <div class=page-out-of>Page {{ forced_current_page }} out of {{ number_of_pages}}</div>
+    <div class=result-count>Showing results {{start_index}} through {{end_index}} out of {{number_of_pages}}</div>
+
+{% else %}
+     {# SECTION CURRENT #}
+    <div class=tableheader>
+        Current Taxonomy
+    </div>
+    {% include "taxonomy/single.html" with taxon=current_node %}
+    {# SECTION CHILDREN #}
+    <div class=tableheader>
+        Child Taxonomy
+    </div>
+
+    <div class=per-page-selection>
+        <label name="per_page_label">Results per page:</label>
+        {{ form_data.per_page }}
+    </div>
+
+    {% paginate "browse_form" "current_page" 1 number_of_pages form_data.current_page.value 3 %}
+    <div class=page-out-of>Page {{ forced_current_page }} out of {{ number_of_pages }}</div>
+
+    {% include "taxonomy/table.html" with form_name="browse_form" order_by=form_data.order_by order_dir=form_data.order_dir taxon=children %}
+
+    {% paginate "browse_form" "current_page" 1 number_of_pages form_data.current_page.value 3 %}
+{% comment %}
+    <div class=page-out-of>Page {{ forced_current_page }} out of {{ number_of_pages}}</div>
+    <div class=result-count>Showing results {{start_index}} through {{end_index}} out of {{number_of_pages}}</div>
+{% endcomment %}
+   
+{% endif %}
+</form>
+{% else %}
+have no form data
+{% endif %}
+
+{% include "footer.html" %}
+
+

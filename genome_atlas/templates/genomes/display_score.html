@@ -1,0 +1,5 @@
+{% if genome.score < 1 %}
+<td title="{{genome.nonstd_bp}} non-standard bases{% if genome.nonstd_bp > 1 %}s{% endif %} and {{genome.contig_count}} contig{% if genome.contig_count > 1 %}s{% endif %}">{{genome.score}}</td>
+{% else %}
+<td> {{genome.score}} </td>
+{% endif %}

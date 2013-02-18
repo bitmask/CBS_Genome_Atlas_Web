@@ -1,0 +1,21 @@
+{% comment %}
+This page shows the error message pertaining to the search.
+Should be a no results found thing.
+
+Inputs:
+  'search_type': the type of search that was executed
+     values - 'AN': Accession Number
+              'TI'   Tax ID
+              'BP'   Bioproject
+              'TN'   Tax Name
+              'TIBP' TaxID/Bioproject (the search was a number with no type)
+  'search_term': the query that was used for the search
+
+{% endcomment %}
+
+{% include "header.html" %}
+
+{# Nicely formatted message goes here #}
+<h2> Search for term: {{ search_term }} in field {{ search_type }} has returned no results! </h2>
+
+{% include "footer.html" %}

@@ -1,0 +1,71 @@
+
+<link rel="stylesheet" href="/static/style.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/jquery.js"></script>
+
+<script>
+    $(document).ready(function() {
+      $('a').filter(function() {
+        return this.hostname && this.hostname !== location.hostname;
+      }).after(' <img src="/static/external.png" alt="external link"/>');
+    });
+</script>
+
+<script>
+
+$(function() {
+    $('tr.parent')
+        .click(function(){
+            $(this).siblings('.child-'+this.id).toggle('fast');
+        });
+//    $('tr[class^=child-]').hide(); 
+});
+
+function imgError(image){
+    image.onerror = "";
+    image.src = "/static/noimage.png";
+    return true;
+}
+
+function table_sorting(form_name, form_order_by, form_order_dir, set_value){
+    var sorted_form = document.forms[form_name];
+    var order_by = sorted_form.elements[form_order_by];
+    var order_dir = sorted_form.elements[form_order_dir];
+    if( order_by.value != set_value ){
+        order_by.value  = set_value;
+        order_dir.value = "DSC";
+    }else if(order_dir.value == "DSC"){
+        order_dir.value = "ASC";
+    }else{
+        order_dir.value = "DSC";
+    }
+    sorted_form.action="#ref-" + form_order_by;
+    sorted_form.submit();
+}
+
+function goto_page(form_name, form_page_field, page_number){
+    var page_form = document.forms[form_name];
+    var page_field = page_form.elements[form_page_field];
+    page_field.value = page_number;
+    page_form.action="#ref-" + form_page_field;
+    page_form.submit();
+}
+</script>
+
+<div class="headerblock">
+<a href="/">
+<img src="/static/galogo.png">
+</a>
+<div>
+<a class="headerlink" href="/#ref-current_page_gen">Recently Added</a><a class="headerlink" href="/">Browse Taxonomy</a> <a class="headerlink" href="/score/">Genome Score</a><a class="headerlink" href="/download/">Download Data</a>
+</div>
+</div>
+
+<div class="searchbox">
+Search on genome name, accession number or taxonomic id: 
+<br>
+<form id="search" name="search" action="/search" method="get">
+<input type="text" name="q" size="50"> <input type="submit" value="Go">
+</form>
+</div>
+
+<div class="maincontents">

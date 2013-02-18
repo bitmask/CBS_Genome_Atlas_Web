@@ -1,5 +1,9 @@
 from django.conf.urls import patterns, include, url
 
+from django.contrib import admin
+
+admin.autodiscover()
+
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
@@ -24,7 +28,11 @@ urlpatterns = patterns('',
     url(r'^browse/(?P<tax_id>\d+)/$', 'displaygenome.views.browse.on_request'),
 
     # /admin -> worry about this later
-    url(r'^admin/$', 'displaygenome.views.admin.on_request'),
+    url(r'^jobs/$', 'displaygenome.views.admin.on_request'),
+
+    url(r'^download/$', 'displaygenome.views.download.on_request'),
+    url(r'^download/genomes$', 'displaygenome.views.download.genomes'),
+    url(r'^download/replicons$', 'displaygenome.views.download.replicons'),
 
     #    url(r'^genome/$', 'displaygenome.views.index'),
     #url(r'^genome/(?P<genome_id>\d+)/$', 'displaygenome.views.detail'),
@@ -45,5 +53,5 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
 )

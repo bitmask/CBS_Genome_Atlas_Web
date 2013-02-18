@@ -1,0 +1,52 @@
+{% include "header.html" %}
+
+
+<h1>Genome Score</h1>
+
+<h2>Motivation</h2>
+<div>
+Many genomes are incorrectly annotated, and this makes it difficult to know whether the data in question is complete and correct.  The genome score is calculated from the genome itself, and gives a single number that indicates whether a genome is in many contigs or has many nonstandard (unknown) base pairs.  This makes it easier to understand the quality of the data.
+</div>
+
+<h2>Display</h2>
+<div>
+The scores that are displayed are for the indicated genome or accession number.  Scores for the genome are calculated over the total length of the genome including all replicons.  The genome score is not an average of the values for each replicon in the genome.  
+</div>
+<div>
+However, scores that are displayed for taxonomic entries (eg Gammaproteobacteria or Vibrionacea) are averages over all of the genomes that are contained under that taxonomic entry.  
+</div>
+
+<h2>Score Algorithm</h2>
+<div>
+Each genome starts with a score of 1, and fractions are subtracted for having non-standard base pairs and contigs.
+The min score the genome can receive if it has a sequence is .1.  A genome receives a score of 0 if there is no sequence present.
+</div>
+<h3>Non standard base pairs</h3>
+<div>
+Subtract .1 for every 1 percent of non standard bases in across the whole genome up to a maximum penalty of .9.
+</div>
+<div>
+Examples:
+<ul>
+<li>If a genome contains .8% non-standard base pairs is penalized .1</li>
+<li>If it contains 1.1%, is penalized .2 </li>
+</ul>
+</div>
+<h3>Contigs</h3>
+<div>
+Subtract .2 for every 25 contigs in excess of the number of chromosomes and plasmids per megabase.  A genome will not be penalized if it has multiple chromosomes or plasmids, but it will be penalized if it has more contigs than replicons.  The largest penalty that can be subtracted here is .9.  
+</div>
+<div>
+Examples:
+<ul>
+<li> For E. coli with a genome size of 4 megabases, that contains 1 extra contig, it will be penalized .2 </li>
+<li> if it has 2 extra contigs, it will be penalized .2 </li>
+<li> if it has 101 extra contigs (more than 25 contigs per megabase), it will be penalized .4 </li>
+</ul>
+</div>
+
+
+
+
+{% include "footer.html" %}
+

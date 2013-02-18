@@ -1,0 +1,29 @@
+{% comment %}
+Expected Inputs:
+    'taxon' : the taxonomy to display
+    'form_name' : the name of the form (for updates)
+    'order_by' : order_by value for this table
+    'order_dir' : order_dir value for this table
+{% endcomment %}
+
+{% load table_tools %}
+<table class=table-taxonomy border=0>
+   <tr>
+      {% table_header form_name "tax_id" order_by order_dir "Tax ID" %}
+      {% table_header form_name "tax_name" order_by order_dir "Taxonomic Name" %}
+      {% table_header form_name "genome_count" order_by order_dir "Genomes" %}
+      {% table_header form_name "score" order_by order_dir "Score<sup><a href='/score' title='Definition of Score'>?</a></sup>" %}
+      {% table_header form_name "percent_at" order_by order_dir "Percent AT" %}
+      {% table_header form_name "gene_density" order_by order_dir "Gene Density" %}
+   </tr>
+   {% for t in taxon %}
+      <tr id="{{ t.tax_id }}" class="parent">
+         <td><a href="/browse/{{ t.tax_id }}">{{ t.tax_id }}</a></td>
+         <td><a href="/browse/{{t.tax_id}}">{{ t.tax_name }}</a></td>
+         <td>{{ t.genome_count }}</td>
+         <td>{{ t.score }}</td>
+         <td>{{ t.percent_at }}</td>
+         <td>{{ t.gene_density }}</td>
+      </tr>
+   {% endfor %}
+</table>
