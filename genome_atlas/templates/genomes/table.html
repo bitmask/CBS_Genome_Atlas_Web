@@ -8,7 +8,7 @@ Expected Inputs:
 {% load table_tools %}
 <table class=table-genome border=0>
    <tr>
-      {% table_header form_name "modify_date" order_by order_dir "Modify Date" %}
+      {% table_header form_name "release_date" order_by order_dir "Release Date" %}
       {% table_header form_name "tax_id" order_by order_dir "Tax ID" %}
       {% table_header form_name "bioproject_id" order_by order_dir "Bioproject ID"%}
       {% table_header form_name "genome_name" order_by order_dir "Genome Name" %}
@@ -24,7 +24,7 @@ Expected Inputs:
    </tr>
    {% for g in genome %}
    <tr id="{{ genome.genome_id }}" class="parent">
-      <td>{{ g.modify_date }}</td>
+      <td>{{ g.release_date }}</td>
       <td>{{ g.tax_id }}</td>
       <td><a href="http://www.ncbi.nlm.nih.gov/bioproject?term={{ g.bioproject_id }}">{{ g.bioproject_id }}</a></td>
       <td><a href="/browse/{{g.tax_id}}">{{ g.genome_name }}</a></td>

@@ -6,7 +6,7 @@ class Tax_Stats(models.Model):
 
     row_id = models.IntegerField(primary_key=True)
     tax_id = models.IntegerField()
-    modify_date = models.DateField()
+    release_date = models.DateField()
     tax_name = models.CharField(max_length=200)
     genome_count = models.IntegerField()
     score = models.FloatField()
@@ -27,7 +27,7 @@ class Genome_Stats(models.Model):
 
     row_id = models.IntegerField(primary_key=True)
     genome_id = models.IntegerField(primary_key=True)
-    modify_date = models.DateField()
+    release_date = models.DateField()
     tax_id = models.IntegerField()
     bioproject_id = models.IntegerField()
     genome_name = models.CharField(max_length=200)

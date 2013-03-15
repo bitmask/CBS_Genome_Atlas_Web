@@ -17,11 +17,11 @@ def genomes(request):
     response['Content-Disposition'] = 'attachment; filename="genomeatlas_genomes.csv"'
 
     writer = csv.writer(response)
-    writer.writerow(['genome_id', 'modify_date', 'tax_id', 'bioproject_id', 'genome_name', 'score', 'chromosome_count', 'plasmid_count', 'total_bp', 'gene_count', 'gene_density', 'percent_at', 'rrna_count', 'trna_count'])
+    writer.writerow(['genome_id', 'release_date', 'tax_id', 'bioproject_id', 'genome_name', 'score', 'chromosome_count', 'plasmid_count', 'total_bp', 'gene_count', 'gene_density', 'percent_at', 'rrna_count', 'trna_count'])
     for g in genomes:
         name = g.genome_name
         newname = name.replace(',', ' ') # one genome has a comma in its name
-        writer.writerow([g.genome_id, g.modify_date, g.tax_id, g.bioproject_id, newname, g.score, g.chromosome_count, g.plasmid_count, g.total_bp, g.gene_count, g.gene_density, g.percent_at, g.rrna_count, g.trna_count])
+        writer.writerow([g.genome_id, g.release_date, g.tax_id, g.bioproject_id, newname, g.score, g.chromosome_count, g.plasmid_count, g.total_bp, g.gene_count, g.gene_density, g.percent_at, g.rrna_count, g.trna_count])
 
     return response
 

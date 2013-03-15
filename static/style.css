@@ -1,6 +1,6 @@
 body
 {
-    background-color:#d0dafd;
+    background-color:#ffffff;
     font-family: "Lucida Sans Unicode","Lucida Grande",Sans-Serif;
     font-size: 14px;
 }
@@ -14,6 +14,11 @@ a:visited {color: rgb(52, 52, 153);}
     font-weight: bold;
     font-size: 20px;
     padding-bottom: 25px;
+}
+
+.tablepreamble
+{
+    text-align: center;
 }
 
 
@@ -39,7 +44,6 @@ td
     font-weight: normal;
     color: rgb(102, 102, 153);
     border-bottom: 2px solid rgb(102, 120, 177);
-    padding: 5px 5px;
 vertical-align: top;
 border: 0px none;
 outline: 0px none;
@@ -52,6 +56,12 @@ font-style: normal;
 font-size: small;
 }
 
+.unused
+{
+    padding: 5px 5px;
+}
+
+
 tr:hover td{background:#d0dafd;color:#339;}
 
 .hidden_row
@@ -62,18 +72,45 @@ tr:hover td{background:#d0dafd;color:#339;}
 .headerblock
 {
     float: left;
+    padding-bottom: 40px;
 }
 
 .headerlink
 {
     padding:      10px;
     padding-left: 30px;
+    float: right;
 }
+
+.headername
+{
+    font-size: 40px;
+    padding-left: 30px;
+}
+
+
+.headerlogo
+{
+    float: left
+}
+
+.headerleft
+{
+    float: left
+}
+
+.headerright
+{
+    float: right
+}
+
+
 
 .searchbox
 {
-    padding:    50px;
     float:      right;
+    padding-left: 260px;
+    vertical-align: bottom;
 }
 
 .maincontents
@@ -93,6 +130,7 @@ tr:hover td{background:#d0dafd;color:#339;}
     clear: both;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 50px;
 }
 
 .table-genome
@@ -100,6 +138,7 @@ tr:hover td{background:#d0dafd;color:#339;}
     clear: both;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 50px;
 }
 
 .table-accession

@@ -8,7 +8,7 @@ Expected Inputs:
 {% load table_tools %}
 <table class=table-genome border=0>
    <tr>
-      <th>Modify Date</th>
+      <th>Release Date</th>
       <th>Tax ID</th>
       <th>Bioproject ID</th>
       <th>Genome Name</th>
@@ -23,7 +23,7 @@ Expected Inputs:
       <th>tRNA</th>
    </tr>
    <tr id="{{ genome.genome_id }}" class="parent">
-      <td>{{ genome.modify_date }}</td>
+      <td>{{ genome.release_date }}</td>
       <td>{{ genome.tax_id }}</td>
       <td><a href="http://www.ncbi.nlm.nih.gov/bioproject?term={{ genome.bioproject_id }}">{{ genome.bioproject_id }}</a></td>
       <td><a href="/browse/{{genome.tax_id}}">{{ genome.genome_name }}</a></td>

@@ -39,7 +39,7 @@ class BrowseForm(forms.Form):
     order_dir_selection = (('ASC', 'Ascending'), ('DSC', 'Descending'))
 
     order_by_selection=( 
-                             ('modify_date', 'Modify Date'),
+                             ('release_date', 'Release Date'),
                              ('tax_id', 'Taxonomy ID'),
                              ('tax_name', 'Tax Name'),
                              ('score','Genome Score'),

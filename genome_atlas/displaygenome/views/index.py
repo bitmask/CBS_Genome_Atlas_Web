@@ -29,7 +29,7 @@ class IndexForm(forms.Form):
 
     order_dir_selection = (('ASC', 'Ascending'), ('DSC', 'Descending'))
     order_by_gen_selection=(
-                             ('modify_date', 'Modify Date'),
+                             ('release_date', 'Release Date'),
                              ('tax_id', 'Taxonomy ID'),
                              ('bioproject_id', 'Bioproject ID'),
                              ('genome_name', 'Genome Name'),
@@ -71,7 +71,7 @@ def on_request(request):
         initial_data={
                        'current_page_gen':1,
                        'order_by_tax':'tax_name',
-                       'order_by_gen':'modify_date',
+                       'order_by_gen':'release_date',
                        'order_dir_tax':'ASC',
                        'order_dir_gen':'DSC',
                        'per_page_gen':10,
@@ -140,6 +140,7 @@ def on_request(request):
       'form_data': form_data,
       'forced_current_page_gen':current_page,
       'number_of_pages_gen': number_of_pages,
+      'genome_count': genome_count,
     })
      
     return HttpResponse(t.render(c))

@@ -16,7 +16,7 @@ class TaxonomyForm(forms.Form):
 # These fields are searchable for taxonomy nodes
 
     order_by_selection=(
-                         ('modify_date', 'Modify Date'),
+                         ('release_date', 'Release Date'),
                          ('tax_id', 'Taxonomy ID'),
                          ('bioproject_id', 'Bioproject ID'),
                          ('genome_name', 'Genome Name'),

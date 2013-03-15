@@ -76,7 +76,7 @@ def tax(request, tax_id):
 
 def latest(request):
     latest_genome_list = Genome_Stats.objects.all().order_by("-genome_id")[:10]
-    #latest_genome_list = Genome_Stats.objects.filter(modify_date__gt=datetime.date(2012, 01, 10)).order_by("-genome_id") #yyyyddmm
+    #latest_genome_list = Genome_Stats.objects.filter(release_date__gt=datetime.date(2012, 01, 10)).order_by("-genome_id") #yyyyddmm
     accession = []
     for genome in latest_genome_list:
         accession.append(Replicon_Stats.objects.filter(genome_id__exact = genome.genome_id))

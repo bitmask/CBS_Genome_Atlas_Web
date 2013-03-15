@@ -40,9 +40,13 @@ Definition of form_data:
 <a id="ref-order_by_tax" />
 <div class=tableheader>All Prokaryotic Phyla - Genome Average Values</div>
 
-{% include "taxonomy/table.html" with form_name="index_form" order_by=form_data.order_by_tax order_dir=form_data.order_dir_tax taxon=taxon %}
+<div class=tablepreamble>
+Displaying {{ genome_count }} genomes from {{taxon_count}} phyla (28 Bacterial phyla and 3 Archaeal phyla).<br>
+Score, percent AT and gene density are genome averages. <br>
+Click on any table header to sort on that column.
+</div>
 
-<div class=result-count>Showing {{taxon_count}} Phyla</div>
+{% include "taxonomy/table.html" with form_name="index_form" order_by=form_data.order_by_tax order_dir=form_data.order_dir_tax taxon=taxon %}
 
 {% comment %}
     End Section TAXONOMY
@@ -54,6 +58,12 @@ Definition of form_data:
 
 <a id="ref-current_page_gen" /><a id="ref-order_by_gen" />
 <div class=tableheader>Browse Genomes</div>
+
+<div class=tablepreamble>
+Displaying all {{ genome_count }} prokaryotic genomes.  <br>
+All values are calculated over the entire genome.  <br>
+Click on any table header to sort on that column.
+</div>
 
 <div class=per-page-selection>
     <label name="per_page_label">Results per page:</label>

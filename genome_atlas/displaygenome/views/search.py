@@ -34,7 +34,7 @@ class SearchResultForm(forms.Form):
     order_dir_selection = (('ASC', 'Ascending'), ('DSC', 'Descending'))
 
     order_by_gen_selection=(
-                             ('modify_date', 'Modify Date'),
+                             ('release_date', 'Release Date'),
                              ('tax_id', 'Taxonomy ID'),
                              ('bioproject_id', 'Bioproject ID'),
                              ('genome_name', 'Genome Name'),
