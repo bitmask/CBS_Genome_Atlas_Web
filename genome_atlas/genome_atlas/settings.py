@@ -9,10 +9,16 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+import socket;
+if socket.gethostname() == "gatlas":
+    db = 'gatlas'
+elif socket.gethostname() == "gatlasdev":
+    db = 'steve_private'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'steve_private',                      # Or path to database file if using sqlite3.
+        'NAME': db,                      # Or path to database file if using sqlite3.
         'USER': 'helen',                      # Not used with sqlite3.
         'PASSWORD': 'WtT7hVyT',                  # Not used with sqlite3.
         'HOST': 'mysql',                      # Set to empty string for localhost. Not used with sqlite3.
