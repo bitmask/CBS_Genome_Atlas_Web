@@ -1,14 +1,16 @@
+<head>
 
 <link rel="stylesheet" href="/static/style.css" type="text/css" media="screen" />
 <script type="text/javascript" src="/static/jquery.js"></script>
+<title>Genome Atlas Database</title>
 
 <script>
     $(document).ready(function() {
+      $('tr:nth-child(2n+1)').addClass('odd');
+      $('tr:nth-child(2n)').addClass('even');
       $('a').filter(function() {
         return this.hostname && this.hostname !== location.hostname;
       }).after(' <img src="/static/external.png" alt="external link"/>');
-      $("tr:odd").css("background-color", "#cccccc");
-      $("tr:even").css("background-color", "#ddd");
     });
 </script>
 
@@ -55,6 +57,10 @@ function goto_page(form_name, form_page_field, page_number){
 
 </script>
 
+</head>
+
+<body>
+
 
 <div class="headerblock">
 <div class="headerlogo">
@@ -63,17 +69,21 @@ function goto_page(form_name, form_page_field, page_number){
 <div class="headerleft">
 <div class="headername"> Genome Atlas Database </div>
 <div class="headerlinks">
-<a class="headerlink" href="/#ref-current_page_gen">Recently Added</a><a class="headerlink" href="/">Browse Taxonomy</a> <a class="headerlink" href="/score/">Genome Score</a><a class="headerlink" href="/download/">Download Data</a>
+<a class="headerlink" href="/about/">About</a>
+<a class="headerlink" href="/score/">Genome Score</a>
+<a class="headerlink" href="/download/">Download Data</a>
+<a class="headerlink" href="/">Browse Taxonomy</a>
+<a class="headerlink" href="/#ref-current_page_gen">Recently Added</a>
 </div>
 </div>
 
 
 <div class="headerright">
 <div class="searchbox">
-Search on genome name, accession number or taxonomic id: 
+Search for genome name, accession number or taxonomic id: 
 <br>
 <form id="search" name="search" action="/search" method="get">
-<input type="text" name="q" size="50"> <input type="submit" value="Go">
+<input type="text" name="q" size="67"> <input type="submit" value="Search">
 </form>
 </div>
 </div>

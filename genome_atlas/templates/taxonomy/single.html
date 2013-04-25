@@ -10,15 +10,15 @@ Expected Inputs:
       <th>Taxonomic Name</th>
       <th>Genomes</th>
       <th>Score<sup><a href='/score' title='Definition of Score'>?</a></sup></th>
-      <th>Gene Density</th>
       <th>Percent AT</th>
+      <th>Gene Density</th>
    </tr>
    <tr id="{{ taxon.tax_id }}" class="parent">
          <td>{{ taxon.tax_id }}</td>
          <td>{{ taxon.tax_name }}</td>
          <td>{{ taxon.genome_count }}</td>
          <td>{{ taxon.score }}</td>
-         <td>{{ taxon.gene_density }}</td>
          <td>{{ taxon.percent_at }}</td>
+         <td>{{ taxon.gene_density }}</td>
    </tr>
 </table>

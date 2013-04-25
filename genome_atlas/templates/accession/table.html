@@ -6,6 +6,14 @@ Expected Inputs:
     'order_dir' : order_dir value for this table
 {% endcomment %}
 
+<script>
+function imgError(image){
+    image.onerror = "";
+    image.src = "/static/noimage.png";
+    return true;
+}
+</script>
+
 {% load table_tools %}
 <table class=table-accession border=0>
    <tr>
@@ -22,7 +30,7 @@ Expected Inputs:
    </tr>
    {% for a in accession %}
    <tr id="{{ a.accession }}" class="parent">
-      <td>{{ a.accession }}</td>
+      <td>{{ a.accession }}<br><img src="/static/thumbnails/{{ a.accession }}_{{ a.version }}.atlasthumb.png" onerror="imgError(this)"></td>
       <td>{{ a.version }}</td>
       {# <td>{{ a.score }}</td> #}{% include "genomes/display_score.html" with genome=a %}
       <td>{{ a.replicon_type }}</td>

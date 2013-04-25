@@ -67,7 +67,7 @@ def on_request(request, tax_id):
                        'current_page':1,
                        'order_by':'tax_name',
                        'order_dir':'ASC',
-                       'per_page':10,
+                       'per_page':25,
                      }   
         current_page=int(1)
         form_data=BrowseForm(initial_data)
@@ -82,7 +82,7 @@ def on_request(request, tax_id):
     else:
         return HttpResponse( form_data.errors )
         current_page=int(1)
-        per_page=int(10)
+        per_page=int(25)
 
 
     # Fetch the current level
@@ -104,7 +104,8 @@ def on_request(request, tax_id):
             parent_ids = parent_ids + ", " + str(parent.parent_tax_id)
             ptax_id = parent.parent_tax_id
 
-    parent_level = Tax_Stats.objects.extra(where=["tax_id in (" + parent_ids + ")"]).order_by('genome_count').reverse()
+    parent_ids += ", " + str(tax_id) # Adds current node to tax tree
+    parent_level = Tax_Stats.objects.extra(where=["tax_id in (" + parent_ids + ")"]).order_by('genome_count').reverse() #XXX if there is only one genome, these might come back in the wrong order
 
     #get the children of the request tax_id
     children = Nodes.objects.using('taxonomy').filter(parent_tax_id__exact = tax_id)
@@ -124,9 +125,12 @@ def on_request(request, tax_id):
             genome_level = t
         if (genome_level):
             child_level = Replicon_Stats.objects.filter(genome_id__exact = genome_level.genome_id).order_by('accession')
-            number_of_pages = (child_level.count() / per_page) + 1
-            current_page = min(number_of_pages, current_page)
-            first_index = (current_page-1) * per_page
+
+            #always show all replicons, don't do pagination
+            number_of_pages = 1 #(child_level.count() / per_page) + 1
+            current_page = 1 #min(number_of_pages, current_page)
+            first_index = 1 #(current_page-1) * per_page
+
             tax_level = genome_level # use the genome objects, not the tax objects
             is_accession = True
         else:

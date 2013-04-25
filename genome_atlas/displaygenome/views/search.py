@@ -215,8 +215,8 @@ def display_results( request, taxons ):
                        'order_by_gen':'genome_name',
                        'order_dir_tax':'ASC',
                        'order_dir_gen':'ASC',
-                       'per_page_gen':10,
-                       'per_page_tax':10,
+                       'per_page_gen':25,
+                       'per_page_tax':25,
                      }
         form_data=SearchResultForm(initial_data)
 

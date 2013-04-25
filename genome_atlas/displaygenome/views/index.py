@@ -74,7 +74,7 @@ def on_request(request):
                        'order_by_gen':'release_date',
                        'order_dir_tax':'ASC',
                        'order_dir_gen':'DSC',
-                       'per_page_gen':10,
+                       'per_page_gen':25,
                      }
         form_data=IndexForm(initial_data)
 
@@ -96,7 +96,7 @@ def on_request(request):
         current_page=int(1)
         order_by='genome_name'
         order_dir='ASC'
-        per_page=int(10)
+        per_page=int(25)
     
     # Convert so we can use in our query
     order = order_by

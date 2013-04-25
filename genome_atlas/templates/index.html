@@ -1,6 +1,10 @@
 
 {% include "header.html" %}
 
+
+
+
+
 {% comment %}
 Input Data:
  - 'taxon' : List of taxon nodes
@@ -37,12 +41,12 @@ Definition of form_data:
     Begin Section TAXONOMY
 {% endcomment %}
 
-<a id="ref-order_by_tax" />
-<div class=tableheader>All Prokaryotic Phyla - Genome Average Values</div>
+<a id="ref-order_by_tax"></a>
+<div class=tableheader>Prokaryotic Phyla</div>
 
 <div class=tablepreamble>
 Displaying {{ genome_count }} genomes from {{taxon_count}} phyla (28 Bacterial phyla and 3 Archaeal phyla).<br>
-Score, percent AT and gene density are genome averages. <br>
+Genome score, percent AT and gene density are genome averages. <br>
 Click on any table header to sort on that column.
 </div>
 
@@ -56,12 +60,12 @@ Click on any table header to sort on that column.
     Begin section GENOME
 {% endcomment %}
 
-<a id="ref-current_page_gen" /><a id="ref-order_by_gen" />
-<div class=tableheader>Browse Genomes</div>
+<a id="ref-current_page_gen"> </a> <a id="ref-order_by_gen"> </a>
+<div class=tableheader>Prokaryotic Genomes</div>
 
 <div class=tablepreamble>
 Displaying all {{ genome_count }} prokaryotic genomes.  <br>
-All values are calculated over the entire genome.  <br>
+All values are calculated over the genome (all replicons).  <br>
 Click on any table header to sort on that column.
 </div>
 
@@ -71,13 +75,10 @@ Click on any table header to sort on that column.
 </div>
 
 {% paginate "index_form" "current_page_gen" 1 number_of_pages_gen form_data.current_page_gen.value 3 %}
-    <div class=page-out-of>Page {{ forced_current_page_gen }} out of {{ number_of_pages_gen}}</div>
 
 {% include "genomes/table.html" with form_name="index_form" order_by=form_data.order_by_gen order_dir=form_data.order_dir_gen genome=genome_slice%}
 
 {% paginate "index_form" "current_page_gen" 1 number_of_pages_gen form_data.current_page_gen.value 3 %}
-    <div class=page-out-of>Page {{ forced_current_page_gen }} out of {{ number_of_pages_gen}}</div>
-    <div class=result-count>Showing results {{start_index}} through {{end_index}} out of {{genome_total_count}}</div>
 
 {% comment %}
     End Section GENOME

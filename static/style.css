@@ -1,3 +1,4 @@
+
 body
 {
     background-color:#ffffff;
@@ -5,20 +6,35 @@ body
     font-size: 14px;
 }
 
-a:link {color: rgb(102, 102, 153);}
-a:visited {color: rgb(52, 52, 153);} 
+a:link {
+    color: rgb(102, 102, 153);
+    text-decoration:none;
+}
+
+a:visited {
+    color: rgb(52, 52, 153);
+    text-decoration:none;
+}
+
+a:hover {text-decoration:underline;}
+a:active {text-decoration:underline;}
 
 .tableheader
 {
+    clear: both;
     text-align: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
     padding-bottom: 25px;
+    padding-top: 10px;
 }
 
 .tablepreamble
 {
-    text-align: center;
+    text-align: left;
+    font-size: small;
+    text-color: "AAA";
+    padding-left: 290px;
 }
 
 
@@ -27,16 +43,15 @@ th
     font-weight: bold;
     color: rgb(0, 51, 153);
     border-bottom: 2px solid rgb(102, 120, 177);
-    padding: 10px 18px;
+    padding: 5 18px;
     vertical-align: top;
-border: 0px none;
-outline: 0px none;
-vertical-align: baseline;
-background: none repeat scroll 0% 0% transparent;
-background-color: rgb(182,182,183);
-font-family: "Lucida Sans Unicode","Lucida Grande",Sans-Serif;
-text-align: center;
-
+    border: 0px none;
+    outline: 0px none;
+    vertical-align: baseline;
+    background: none repeat scroll 0% 0% transparent;
+    background-color: rgb(182,182,183);
+    font-family: "Lucida Sans Unicode","Lucida Grande",Sans-Serif;
+    text-align: center;
 }
 
 td
@@ -44,16 +59,16 @@ td
     font-weight: normal;
     color: rgb(102, 102, 153);
     border-bottom: 2px solid rgb(102, 120, 177);
-vertical-align: top;
-border: 0px none;
-outline: 0px none;
-background: none repeat scroll 0% 0% transparent;
-background-color:#ffffff;
-text-align: center;
-border-spacing: 0px;
-font-weight: 400;
-font-style: normal;
-font-size: small;
+    padding: 2 0px;
+    vertical-align: top;
+    border: 0px none;
+    outline: 0px none;
+    background: none repeat scroll 0% 0% transparent;
+    text-align: center;
+    border-spacing: 0px;
+    font-weight: 400;
+    font-style: normal;
+    font-size: small;
 }
 
 .unused
@@ -63,6 +78,9 @@ font-size: small;
 
 
 tr:hover td{background:#d0dafd;color:#339;}
+
+tr.odd {background-color: #DDD}
+tr.even {background-color: #EFEFEF}
 
 .hidden_row
 {
@@ -75,10 +93,15 @@ tr:hover td{background:#d0dafd;color:#339;}
     padding-bottom: 40px;
 }
 
+.headerlinks
+{
+    padding-left: 10px;
+}
+
 .headerlink
 {
     padding:      10px;
-    padding-left: 30px;
+    padding-left: 20px;
     float: right;
 }
 
@@ -86,6 +109,7 @@ tr:hover td{background:#d0dafd;color:#339;}
 {
     font-size: 40px;
     padding-left: 30px;
+    font-weight: bold;
 }
 
 
@@ -125,11 +149,52 @@ tr:hover td{background:#d0dafd;color:#339;}
     font-style: italic;
 }
 
+.infobox
+{
+    width: 1000px;
+    height: 550px;
+    margin-left: 120px;
+    background-color: DDD;
+    clear: both;
+    padding: 50px;
+}
+
+.lineage
+{
+    font-size: small;
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.taxrow
+{
+    clear: both;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+}
+
+.taximgs
+{
+    float: left;
+    vertical-align: text-top;
+    height: 20px;
+}
+
+.taxname
+{
+    float: left;
+    height: 20px;
+    margin-left: 10px;
+}
+
 .table-taxonomy
 {
     clear: both;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 25px;
     padding-bottom: 50px;
 }
 
